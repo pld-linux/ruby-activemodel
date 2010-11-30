@@ -1,13 +1,13 @@
 %define pkgname activemodel
 Summary:	Extracts common modeling concerns from ActiveRecord
 Name:		ruby-%{pkgname}
-Version:	3.0.0
-Release:	0.beta.1
+Version:	3.0.3
+Release:	1
 License:	Ruby-alike
-Source0:	http://rubygems.org/downloads/%{pkgname}-%{version}.beta.gem
-# Source0-md5:	1e3d6f39257ff72c1861f74f110f3e38
+Source0:	http://rubygems.org/downloads/%{pkgname}-%{version}.gem
+# Source0-md5:	cc6ce5e9cb8d1ed2ca253010dd5d67b7
 Group:		Development/Languages
-URL:		http://rubyforge.org/projects/activeresource/
+URL:		http://rubyonrails.org/
 BuildRequires:	rpmbuild(macros) >= 1.484
 BuildRequires:	ruby >= 1:1.8.6
 BuildRequires:	ruby-modules
@@ -46,7 +46,7 @@ Dokumentacji w formacie ri dla %{pkgname}.
 %prep
 %setup -q -c
 %{__tar} xf %{SOURCE0} -O data.tar.gz | %{__tar} xz
-find -newer README  -o -print | xargs touch --reference %{SOURCE0}
+find -newer README.rdoc  -o -print | xargs touch --reference %{SOURCE0}
 
 %build
 rdoc --ri --op ri lib
@@ -66,7 +66,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc CHANGELOG README
+%doc CHANGELOG README.rdoc
 %{ruby_rubylibdir}/active_model.rb
 %{ruby_rubylibdir}/active_model
 
