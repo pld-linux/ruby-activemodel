@@ -2,26 +2,21 @@
 Summary:	Extracts common modeling concerns from ActiveRecord
 Name:		ruby-%{pkgname}
 Version:	3.2.19
-Release:	2
+Release:	3
 License:	Ruby-alike
 Source0:	http://rubygems.org/downloads/%{pkgname}-%{version}.gem
 # Source0-md5:	93c6f903c8c997d171d6f5ccdd96e355
 Group:		Development/Languages
 URL:		http://rubyonrails.org/
-BuildRequires:	rpmbuild(macros) >= 1.484
-BuildRequires:	ruby >= 1:1.8.6
-BuildRequires:	ruby-modules
+BuildRequires:	rpm-rubyprov
+BuildRequires:	rpmbuild(macros) >= 1.665
 Requires:	ruby-activesupport >= 3.2.0
-%{?ruby_mod_ver_requires_eq}
-#BuildArch:	noarch
+BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-# nothing to be placed there. we're not noarch only because of ruby packaging
-%define		_enable_debug_packages	0
-
 %description
-Extracts common modeling concerns from ActiveRecord to share
-between similar frameworks like ActiveResource.
+Extracts common modeling concerns from ActiveRecord to share between
+similar frameworks like ActiveResource.
 
 %package rdoc
 Summary:	Documentation files for %{pkgname}
@@ -53,12 +48,13 @@ Dokumentacji w formacie ri dla %{pkgname}.
 rdoc --ri --op ri lib
 rdoc --op rdoc lib
 rm ri/created.rid
+rm ri/cache.ri
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{ruby_rubylibdir},%{ruby_ridir},%{ruby_rdocdir}}
+install -d $RPM_BUILD_ROOT{%{ruby_vendorlibdir},%{ruby_ridir},%{ruby_rdocdir}}
 
-cp -a lib/* $RPM_BUILD_ROOT%{ruby_rubylibdir}
+cp -a lib/* $RPM_BUILD_ROOT%{ruby_vendorlibdir}
 cp -a ri/* $RPM_BUILD_ROOT%{ruby_ridir}
 cp -a rdoc $RPM_BUILD_ROOT%{ruby_rdocdir}/%{pkgname}-%{version}
 
@@ -72,8 +68,8 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc CHANGELOG.md README.rdoc
-%{ruby_rubylibdir}/active_model.rb
-%{ruby_rubylibdir}/active_model
+%{ruby_vendorlibdir}/active_model.rb
+%{ruby_vendorlibdir}/active_model
 %{ruby_specdir}/%{pkgname}-%{version}.gemspec
 
 %files rdoc
