@@ -2,7 +2,7 @@
 Summary:	Extracts common modeling concerns from ActiveRecord
 Name:		ruby-%{pkgname}
 Version:	3.2.19
-Release:	4
+Release:	5
 License:	Ruby-alike
 Source0:	http://rubygems.org/downloads/%{pkgname}-%{version}.gem
 # Source0-md5:	93c6f903c8c997d171d6f5ccdd96e355
